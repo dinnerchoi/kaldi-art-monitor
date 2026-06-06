@@ -63,7 +63,9 @@ body {
   z-index: 100;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.section-nav::-webkit-scrollbar { display: none; }
 .section-nav ul {
   list-style: none;
   display: flex;
@@ -129,7 +131,7 @@ body {
 }
 .hero p {
   font-size: 17px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.78);
   max-width: 550px;
   margin: 0 auto;
   line-height: 1.6;
@@ -312,7 +314,7 @@ body {
   margin-bottom: 12px;
 }
 .overview-card p {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--dark-gray);
   line-height: 1.7;
 }
@@ -385,7 +387,7 @@ body {
 /* ── Footer ── */
 .footer {
   background: var(--black);
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.7);
   padding: 40px 0;
   text-align: center;
   font-size: 14px;
@@ -442,20 +444,69 @@ body {
 }
 .back-link:hover { text-decoration: underline; }
 
+/* ── Safe Area ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .footer { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+  .section-nav { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .masthead h1 { font-size: 18px; letter-spacing: 2px; }
-  .hero h2 { font-size: 22px; }
-  .hero { padding: 40px 0 36px; }
+  body { font-size: 17px; }
+
+  .masthead { padding: 20px 0 16px; }
+  .masthead h1 { font-size: 22px; letter-spacing: 3px; }
+  .masthead-meta { font-size: 12px; letter-spacing: 1.5px; }
+
+  .section-nav ul { justify-content: flex-start; padding: 0 16px; }
+  .section-nav li a {
+    padding: 14px 14px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero { padding: 44px 0 40px; }
+  .hero h2 { font-size: 26px; line-height: 1.45; }
+  .hero p { font-size: 16px; line-height: 1.65; }
+  .hero .edition-badge { font-size: 12px; margin-bottom: 18px; }
+
+  .container { padding: 0 20px; }
+
   .page-header { padding: 32px 0 28px; }
   .page-header .num { font-size: 36px; }
-  .page-header h2 { font-size: 24px; }
-  .section { padding: 40px 0 32px; }
+  .page-header h2 { font-size: 26px; }
+
+  .section { padding: 36px 0 28px; }
   .section-number { font-size: 28px; }
-  .section-title { font-size: 18px; }
+  .section-title { font-size: 22px; }
+
+  .article-card h3 { font-size: 19px; }
+  .article-card p { font-size: 16px; }
+
+  .overview-grid { padding: 32px 0 40px; gap: 16px; }
+  .overview-card { padding: 24px 22px; }
+  .overview-card .card-num { font-size: 28px; }
+  .overview-card h3 { font-size: 19px; }
+  .overview-card p { font-size: 15px; }
+
   .grid-2, .outlook-grid, .overview-grid { grid-template-columns: 1fr; }
-  .section-nav ul { justify-content: flex-start; }
-  .section-nav li a { padding: 10px 12px; font-size: 11px; }
-  .calendar-table { font-size: 13px; }
-  .calendar-table thead th, .calendar-table tbody td { padding: 8px 6px; }
+
+  .highlight-box { padding: 20px 22px; }
+  .highlight-box h3 { font-size: 18px; }
+  .highlight-box p { font-size: 16px; }
+
+  .calendar-table { font-size: 14px; }
+  .calendar-table thead th, .calendar-table tbody td { padding: 10px 8px; }
+
+  .footer { font-size: 13px; padding: 32px 0; }
+}
+
+/* ── Small phones ── */
+@media (max-width: 380px) {
+  .hero h2 { font-size: 23px; }
+  .section-nav li a { padding: 12px 10px; font-size: 12px; }
+  .overview-card h3 { font-size: 18px; }
 }
