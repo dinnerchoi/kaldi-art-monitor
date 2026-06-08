@@ -1,15 +1,7 @@
 (function () {
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth() + 1;
-  var day = now.getDate();
-  var dateKR = year + '\uB144 ' + month + '\uC6D4 ' + day + '\uC77C';
-
-  // ISO week number
-  var d = new Date(Date.UTC(year, now.getMonth(), day));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  var weekNum = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+  // ── Edition (pinned to the briefing date for an accurate archive) ──
+  var EDITION = { year: 2026, month: 6, day: 8, week: 24 };
+  var dateKR = EDITION.year + '년 ' + EDITION.month + '월 ' + EDITION.day + '일';
 
   // Detect current page
   var path = location.pathname.split('/').pop() || 'index.html';
@@ -17,9 +9,12 @@
 
   var navItems = [
     { href: 'index.html', label: 'Overview' },
-    { href: 'fair.html', label: '\uD398\uC5B4' },
-    { href: 'gallery-shows.html', label: '\uAC24\uB7EC\uB9AC \uC804\uC2DC' },
-    { href: 'museum-shows.html', label: '\uAE30\uAD00 \uC804\uC2DC' }
+    { href: 'gallery.html', label: '갤러리·전속' },
+    { href: 'market.html', label: '옥션·페어' },
+    { href: 'artists.html', label: '작가' },
+    { href: 'exhibitions.html', label: '전시' },
+    { href: 'policy.html', label: '정책·규제' },
+    { href: 'calendar.html', label: '캘린더' }
   ];
 
   // Masthead
@@ -28,7 +23,7 @@
     masthead.innerHTML =
       '<div class="masthead-inner">' +
         '<h1><a href="index.html"><span>KALDI</span> ART</a></h1>' +
-        '<div class="masthead-meta">Global Monitor &mdash; ' + dateKR + ' &middot; Week ' + weekNum + '</div>' +
+        '<div class="masthead-meta">Global Monitor &mdash; ' + dateKR + ' &middot; Week ' + EDITION.week + '</div>' +
       '</div>';
   }
 
@@ -49,14 +44,14 @@
   if (footer) {
     var isIndex = path === 'index.html';
     var extra = isIndex
-      ? '\uBCF8 \uB9AC\uD3EC\uD2B8\uB294 KALDI ART \uB0B4\uBD80\uC6A9\uC73C\uB85C \uC791\uC131\uB418\uC5C8\uC2B5\uB2C8\uB2E4.<br>' +
-        '\uCD9C\uCC98\uAC00 \uBA85\uC2DC\uB418\uC9C0 \uC54A\uC740 \uC815\uBCF4\uB294 \uD3EC\uD568\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.<br><br>'
+      ? '본 리포트는 KALDI ART 내부용으로 작성되었습니다.<br>' +
+        '출처가 명시되지 않은 정보는 포함하지 않습니다.<br><br>'
       : '';
     footer.innerHTML =
       '<div class="container">' +
         '<strong>KALDI ART</strong> &middot; Global Monitor<br>' +
         extra +
-        '&copy; ' + year + ' KALDI ART. All rights reserved.' +
+        '&copy; ' + EDITION.year + ' KALDI ART. All rights reserved.' +
       '</div>';
   }
 })();
